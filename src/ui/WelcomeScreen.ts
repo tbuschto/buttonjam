@@ -1,7 +1,7 @@
 import { ui, Button, TextView, Composite, CompositeProperties, EventObject } from 'tabris';
-import Game from './game';
+import Game from '../game';
 import GameView from './GameView';
-import { asyncListener, omit } from './util';
+import { asyncListener, omit } from '../util';
 
 export default class WelcomeScreen extends Composite {
 

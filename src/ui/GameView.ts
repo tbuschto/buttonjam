@@ -1,8 +1,8 @@
 import { Composite, CompositeProperties, WidgetResizeEvent } from 'tabris';
-import Game from './game';
+import Game from '../game';
 import GameButtonView from './GameButtonView';
-import { omit } from './util';
-import GameButtonModel from './GameButtonModel';
+import { omit } from '../util';
+import GameButtonModel from '../GameButtonModel';
 
 const COLUMNS = 2;
 

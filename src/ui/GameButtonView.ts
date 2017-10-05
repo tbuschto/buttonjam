@@ -1,6 +1,6 @@
 import { Composite, CompositeProperties } from 'tabris';
-import GameButtonModel, { GlowEvent } from './GameButtonModel';
-import { omit, asyncListener, wait } from './util';
+import GameButtonModel, { GlowEvent } from '../GameButtonModel';
+import { omit, asyncListener, wait } from '../util';
 
 const DIM = 0.4;
 const BRIGHT = 1;
