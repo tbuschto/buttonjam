@@ -1,0 +1,20 @@
+{
+  "name": "button-jam",
+  "version": "0.1.0",
+  "main": "dist/app.js",
+  "private": true,
+  "scripts": {
+    "test": "tslint 'src/**/*.ts'",
+    "build": "tsc -p .",
+    "watch": "tsc -w -p .",
+    "start": "tabris serve -w",
+    "serve": "tabris serve"
+  },
+  "dependencies": {
+    "tabris": "^2.2.0-dev.20171005"
+  },
+  "devDependencies": {
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.3"
+  }
+}
