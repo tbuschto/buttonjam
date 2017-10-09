@@ -21,12 +21,7 @@ export default class Game {
   private buttonCounter: number = 0;
 
   public async start() {
-    try {
-      await this.toss(PHASE_ONE_TOSS);
-    } catch (ex) {
-      /* tslint:disable no-console */
-      console.error(ex);
-    }
+    await this.toss(PHASE_ONE_TOSS);
   }
 
   private async toss({ times, delay }: Toss) {
