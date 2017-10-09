@@ -21,8 +21,4 @@ export function asyncListener<T>(listener: AsyncListener<T>) {
   };
 }
 
-export async function wait(delay: number) {
-  return new Promise((resolve) => setTimeout(resolve, delay));
-}
-
 type AsyncListener<T> = (ev: T) => Promise<void>;

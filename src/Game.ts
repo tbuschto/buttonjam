@@ -1,6 +1,6 @@
 import ListenerCollection, { createListenerCollection } from './ListenerCollection';
 import GameButtonModel from './GameButtonModel';
-import { wait } from './util';
+import { wait, asyncListener } from './util';
 
 const PHASE_ONE_TOSS = {
   times: 30,
@@ -19,15 +19,49 @@ export default class Game {
   ];
 
   private buttonCounter: number = 0;
+  private hitHandler: (button: GameButtonModel) => any = null;
+
+  constructor() {
+    this.buttons.forEach(button => button.onHit(asyncListener(this.handleHit)));
+  }
 
   public async start() {
     await this.toss(PHASE_ONE_TOSS);
   }
 
   private async toss({ times, delay }: Toss) {
-    for (let i = 0; i < times; i++) {
+    let hitButton: GameButtonModel;
+    let count = 0;
+    while (count < times && !hitButton) {
       this.nextButton().onGlow.trigger({ duration: delay });
-      await wait(delay);
+      hitButton = await this.waitForHit(delay);
+      count++;
+    }
+    /* tslint:disable no-console */
+    if (hitButton === this.currentButton) {
+      console.log('+1');
+    } else {
+      console.log('-1');
+    }
+  }
+
+  private async waitForHit(timeout: number) {
+    return new Promise<GameButtonModel>((resolve) => {
+      this.hitHandler = (hitButton: GameButtonModel) => {
+        this.hitHandler = null;
+        resolve(hitButton);
+      };
+      setTimeout(() => {
+        if (this.hitHandler) {
+          this.hitHandler(null);
+        }
+      }, timeout);
+    });
+  }
+
+  private handleHit = async (button: GameButtonModel) => {
+    if (this.hitHandler) {
+      this.hitHandler(button);
     }
   }
 
@@ -35,6 +69,10 @@ export default class Game {
     if (++this.buttonCounter >= this.buttons.length) {
       this.buttonCounter = 0;
     }
+    return this.currentButton;
+  }
+
+  private get currentButton() {
     return this.buttons[this.buttonCounter];
   }
 

@@ -1,6 +1,6 @@
 import { Composite, CompositeProperties } from 'tabris';
 import GameButtonModel, { GlowEvent } from '../GameButtonModel';
-import { omit, asyncListener, wait } from '../util';
+import { omit, asyncListener } from '../util';
 
 const DIM = 0.4;
 const BRIGHT = 1;
@@ -16,6 +16,7 @@ export default class GameButtonView extends Composite {
       background: this.model.color,
       opacity: DIM
     });
+    this.on({ touchStart: this.handleTouchStart });
     this.model.onGlow(this.glow);
   }
 
@@ -25,6 +26,10 @@ export default class GameButtonView extends Composite {
       .animate({ opacity: DIM }, {
         delay: ev.duration, duration: 300, easing: 'ease-out'
       });
+  }
+
+  private handleTouchStart() {
+    this.model.onHit.trigger(this.model);
   }
 
 }
