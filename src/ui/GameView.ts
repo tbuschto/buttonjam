@@ -19,10 +19,6 @@ export default class GameView extends Composite {
     this.on({ resize: this.layoutButtons });
   }
 
-  private updateButtons() {
-
-  }
-
   private layoutButtons = ({ width, height }: WidgetResizeEvent) => {
     let side = Math.min(width, height) / 2;
     let offsetX = (width - side * COLUMNS) / 2;
