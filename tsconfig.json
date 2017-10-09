@@ -8,7 +8,8 @@
     "jsxFactory": "JSX.createElement",
     "noImplicitAny": true,
     "noImplicitThis": true,
-    "alwaysStrict": true
+    "alwaysStrict": true,
+    "typeRoots": ["node_modules/@type"]
   },
   "include": [
     "./src/**/*.ts",
